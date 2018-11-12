@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/search_container"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        cardview:contentPadding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        cardview:cardCornerRadius="2dp"
+        cardview:cardElevation="0dp"
+        cardview:cardBackgroundColor="@color/colorAccent"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="clip_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                tools:text="Фича продукта Фича продукта Фича продукта Фича продукт"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/score"
+                tools:text="7.5"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--<View-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@drawable/line"/>-->
+
+
+</LinearLayout>

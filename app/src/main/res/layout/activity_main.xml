@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.akarpov.mainscreenplayground.MainActivity">
+    android:paddingTop="48dp"
+    tools:context="com.example.akarpov.mainscreenplayground.MainActivity"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

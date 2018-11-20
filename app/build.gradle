@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 24
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -42,4 +44,8 @@ dependencies {
     implementation "io.reactivex:rxjava:${rxjava1}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxandroid2}"
     implementation "io.reactivex.rxjava2:rxjava:${rxjava2}"
+}
+
+configurations.all {
+    println(project.property('systemProp.http.proxyHost'))
 }

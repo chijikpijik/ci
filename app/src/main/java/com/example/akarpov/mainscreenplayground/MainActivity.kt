@@ -37,6 +37,7 @@ class MainActivity : PresenterActivity<MainActivity.MainComponent, MainPresenter
                 R.layout.item_holder)
         recyclerView = findViewById(R.id.main_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(MainItemDecoration())
         recyclerView.adapter = adapter
     }
 

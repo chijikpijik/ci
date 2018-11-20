@@ -49,7 +49,6 @@ public class ViewHolder<T> extends RecyclerView.ViewHolder {
         mFirst = first;
         setupFirst(mFirst);
         performBind(data);
-
     }
 
     public boolean isFirst() {

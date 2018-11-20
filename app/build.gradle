@@ -47,5 +47,5 @@ dependencies {
 }
 
 configurations.all {
-    println(project.property('systemProp.http.proxyHost'))
+    println(project.property('org.gradle.jvmargs'))
 }

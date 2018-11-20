@@ -47,5 +47,5 @@ dependencies {
 }
 
 configurations.all {
-    println(project.property('org.gradle.jvmargs'))
+    println('ghui' + project.property('org.gradle.jvmargs'))
 }

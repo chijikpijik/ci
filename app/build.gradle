@@ -1,3 +1,5 @@
+import java.util.function.BiConsumer
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -5,6 +7,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    project.properties.forEach(new BiConsumer<String, Object>() {
+        @Override
+        void accept(String s, Object o) {
+            println("Has property: " + s + " :: " + o + '\n\n\r')
+        }
+    })
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.akarpov.mainscreenplayground"
@@ -47,5 +56,6 @@ dependencies {
 }
 
 configurations.all {
-    println('ghui' + project.property('org.gradle.jvmargs'))
+
+//    println('JVM args: ' + project.property('org.gradle.jvmargs'))
 }

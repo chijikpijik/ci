@@ -7,6 +7,7 @@ import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v8.renderscript.RenderScript;
 import android.view.View;
@@ -24,7 +25,7 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
 
     private int colorActive = 0xFFFF7800;
 
-    private int colorInactive = 0xFFFF7800;
+    private int colorInactive = 0xFFFF0000;
 
     private static final float DP = Resources.getSystem().getDisplayMetrics().density;
 
@@ -34,7 +35,7 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mDirection = 0;
 
-    private int blurRadius = 20;
+    private float blurRadius = DP * 12;
 
     /**
      * Height of the space the indicator takes up at the bottom of the view.
@@ -55,6 +56,8 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
 
     private final Paint mPaint = new Paint();
 
+    private final Paint mPaintSolid = new Paint();
+
     private boolean inited = false;
 
     private int itemBelow = 0;
@@ -67,9 +70,9 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
 
     Bitmap bmp;
 
-    int backgroundwidth = -1;
+    float backgroundwidth = -1;
 
-    int backgroundHeight = -1;
+    float backgroundHeight = -1;
 
     Scheduler bs = Schedulers.newThread();
 
@@ -79,6 +82,9 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
         mPaint.setAntiAlias(true);
         mPaint.setColor(colorActive);
         mPaint.setMaskFilter(new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL));
+
+        mPaintSolid.setStyle(Paint.Style.FILL);
+        mPaintSolid.setColor(colorInactive);
     }
 
     @Override
@@ -102,15 +108,15 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
         backgroundHeight = bottomView.getBottom() - topView.getTop();
 
         Bitmap b = createBackground(bmp);
-//        c.drawBitmap(b, topView.getLeft(), topView.getTop(), null);
-        c.drawBitmap(b, 0, 0, null);
+        c.drawBitmap(b, topView.getLeft(), topView.getTop() - blurRadius, null);
         b.recycle();
     }
 
     private Bitmap createBackground(Bitmap item) {
         Bitmap bitmap =
 //                Bitmap.createBitmap(item);
-                Bitmap.createBitmap(item.getWidth(), backgroundHeight, Bitmap.Config.ARGB_8888);
+                Bitmap.createBitmap((int)(item.getWidth()), (int)(backgroundHeight + blurRadius*2 + 2),
+                        Bitmap.Config.ARGB_8888);
 
         Canvas background = new Canvas(bitmap);
 //
@@ -118,9 +124,13 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
 //                bottomView != null ? bottomView.getRight(): topView.getRight(),
 //                bottomView != null ? bottomView.getBottom() : topView.getBottom());
 //
-        drawRect(background, blurRadius, blurRadius + 4,
-                item.getWidth() + blurRadius*3,
-                100);
+//        Rect r = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+//        background.drawRect(r, mPaintSolid);
+        drawRect(background,
+                (int)blurRadius,
+                (int)blurRadius + 4,
+                (int)(item.getWidth() - blurRadius - 2),
+                (int)(backgroundHeight + blurRadius - 2));
 
 
 //            Create allocation from Bitmap
@@ -161,10 +171,13 @@ public class MainItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
+        int i = ((LinearLayoutManager)parent.getLayoutManager()).findFirstVisibleItemPosition();
+        if (parent.getChildAdapterPosition(view) == i || parent.getChildAdapterPosition(view) == 0) {
+            outRect.top = (int) blurRadius;
+        }
         bottomView = view;
-//        outRect.left = -mIndicatorHeight;
+//        outRect.left = mIndicatorHeight;
 //        outRect.right = -mIndicatorHeight;
-//        outRect.top = mIndicatorHeight;
 //        outRect.bottom = mIndicatorHeight;
         if (!inited) {
             parent.addOnScrollListener(new RecyclerView.OnScrollListener() {

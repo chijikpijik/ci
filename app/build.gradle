@@ -10,7 +10,7 @@ android {
     project.properties.forEach(new BiConsumer<String, Object>() {
         @Override
         void accept(String s, Object o) {
-            println("Has property: " + s + " :: " + o + '\n\n\r')
+//            println("Has property: " + s + " :: " + o + '\n\n\r')
         }
     })
 
@@ -53,9 +53,4 @@ dependencies {
     implementation "io.reactivex:rxjava:${rxjava1}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxandroid2}"
     implementation "io.reactivex.rxjava2:rxjava:${rxjava2}"
-}
-
-configurations.all {
-
-//    println('JVM args: ' + project.property('org.gradle.jvmargs'))
 }

@@ -10,7 +10,7 @@ android {
     project.properties.forEach(new BiConsumer<String, Object>() {
         @Override
         void accept(String s, Object o) {
-//            println("Has property: " + s + " :: " + o + '\n\n\r')
+            println("Has property: " + s + " :: " + o + '\n\n\r')
         }
     })
 

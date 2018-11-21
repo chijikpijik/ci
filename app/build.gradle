@@ -10,9 +10,18 @@ android {
     project.properties.forEach(new BiConsumer<String, Object>() {
         @Override
         void accept(String s, Object o) {
-            println("Has property: " + s + " :: " + o + '\n\n\r')
+//            println("Has property: " + s + " :: " + o + '\n\n\r')
+
         }
     })
+
+//    System.getProperties("").forEach(new BiConsumer<Object, Object>() {
+//        @Override
+//        void accept(Object o, Object o2) {
+////            println("Has property: " + s + " :: " + o + '\n\n\r')
+//        }
+//    })
+    println("Has property: " + System.getProperty("her"))
 
     compileSdkVersion 26
     defaultConfig {
